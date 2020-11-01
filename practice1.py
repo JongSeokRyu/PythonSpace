@@ -29,3 +29,4 @@ print("우리집 " + animal + name)
 print(name + "는" + str(age) + "살")
 print(name + "어른일까요?"+ str(is_adult))
 
+#전체주석 ctrl + /
