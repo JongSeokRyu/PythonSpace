@@ -20,7 +20,7 @@ print((3>0) or (3<5))
 print((3>0) | (3<5))
 
 number = 2+3*4
-print(number)
+print(number) 
 number=number+2
 print(number)
 
@@ -34,3 +34,16 @@ from math import *
 print(floor(4.99)) #내림
 print(ceil(3.14)) #올림
 print(sqrt(16)) #제곱근
+
+from random import *
+print(random()) #0.0 ~ 1.0 미만 임의의 값 
+print(random()*10) #0.0 ~ 10.0
+print(int(random()*10)) #0 ~ 10
+print(int(random()*10) + 1) #1 ~ 10
+
+print(randrange(1,46)) # 1 ~ 46미만 임의의 값
+print(randint(1,45)) #1 ~ 45 이하 임의의 값
+
+#quiz
+a = int(randint(4,28))
+print("오프라인 스터디 모임 날짜는 매월 " + str(a) + "일로 선정되었습니다.")
