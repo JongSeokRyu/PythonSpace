@@ -33,6 +33,8 @@ print("{0:f}".format(5/3))
 # 소수점 특정 자리수 까지 표시
 print("{0:.2f}".format(5/3))
 
+###########################################################################
+
 # 파일 입출력
 # score_file = open("score.txt", "w", encoding="utf8")
 # print("수학 : 0", file=score_file)
@@ -61,8 +63,55 @@ print("{0:.2f}".format(5/3))
 #    print(line, end="")
 #score_file.close()
 
-score_file = open("score.txt", "r", encoding="utf8")
-lines = score_file.readlines()
-for line in lines:
-    print(line, end="")
-score_file.close()
+# score_file = open("score.txt", "r", encoding="utf8")
+# lines = score_file.readlines()
+# for line in lines:
+#     print(line, end="")
+# score_file.close()
+
+###########################################################################
+
+# 피클 (데이터를 파일형태로)
+# 쓰기
+# import pickle
+# profile_file = open("profile.pickle", "wb")
+# profile = {"이름":"박명수", "나이":30, "취미":["축구","골프","코딩"]}
+# print(profile)
+# pickle.dump(profile, profile_file) # profile에 있는 정보를 file에 저장
+# profile_file.close()
+
+# 읽기
+import pickle
+profile_file = open("profile.pickle", "rb")
+profile = pickle.load(profile_file)
+print(profile)
+profile_file.close()
+
+#########################################################################
+
+# with (close 필요x)
+with open("profile.pickle", "rb") as profile_file:
+    print(pickle.load(profile_file))
+
+with open("studt.txt", "w", encoding="utf8") as study_file:
+    study_file.write("파이썬 공부 중")
+
+with open("studt.txt", "r", encoding="utf8") as study_file:
+    print(study_file.read())
+
+########################################################################
+#quiz
+# for i in range(1,51):
+#     quiz_file = open(str(i) +"주차.txt", "w", encoding="utf8")
+#     print("- " + str(i) + " 주차 주간보고 -", file=quiz_file)
+#     print("부서 : ", file=quiz_file)
+#     print("이름 : ", file=quiz_file)
+#     print("업무 요약 : ", file=quiz_file)
+#     quiz_file.close()
+
+for i in range(1,51):
+    with open(str(i) + "주차.txt", "w", encoding="utf8") as quiz_file2:
+        quiz_file2.write("- " + str(i) + " 주차 주간보고")
+        quiz_file2.write("\n부서 : ")
+        quiz_file2.write("\n이름 : ")
+        quiz_file2.write("\n업무 요약 : ")
