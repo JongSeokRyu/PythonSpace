@@ -20,6 +20,13 @@ import numpy as np
 if len(sys.argv) < 2:
     print('usage: ' + sys.argv[0] + ' text_file_name')
 else:
+    print('##### readline 함수 #####')
+    f = open(sys.argv[1], 'r')
+    s = f.readline()
+    print(s, end='')
+    for s in f:
+        print(s, end='')
+    f.close()
     ##############################################################
     # WRITE YOUR OWN CODE LINES
     # - open the input file, without pandas or csv packages
