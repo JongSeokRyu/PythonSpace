@@ -1,6 +1,6 @@
 # ID: 2021220942
 # NAME: 류종석
-# File name: template_read_iris_v2.py
+# File name: hw02-2.py
 # Platform: Python 3.9.0 on Window 10 (PyCharm)
 # Required Package(s): numpy, pandas, matplotlib, sklearn
 
@@ -84,23 +84,23 @@ df.head()
 # extract the label column
 y = df.iloc[:, 4].values
 
-# Setosa, Virginica 데이터만 가져와서 배열 재조합
-y1 = np.array(y[0:50])
+# Versicolor, Virginica 데이터만 가져와서 배열 재조합
+y1 = np.array(y[50:100])
 y2 = np.array(y[100:150])
 y = np.concatenate((y1,y2))
 y = y[0:100]
-y = np.where(y == 'Iris-setosa', 1, -1) # Setosa 데이터가 맞으면 1 아니면 -1
+y = np.where(y == 'Iris-versicolor', 1, -1) # versicolor 맞으면1 아니면 -1
 # print(y)
 
 # extract features
 x = df.iloc[:, 0:4].values
 
-#Setosa, Virginica 데이터만 가져와서 배열 재조합
-x1 = np.array(x[0:50])     # Setosa 데이터 4종류들
-x2 = np.array(x[100:150])  # Virginica 데이터 4종류들
+# Versicolor, Virginica 데이터만 가져와서 배열 재조합
+x1 = np.array(x[50:100])    # versicolor 데이터 4종류들
+x2 = np.array(x[100:150])   # virginica 데이터 4종류들
 x = np.concatenate((x1,x2))
 x = x[0:100]
-# print(x)
+#print(x)
 
 from sklearn.model_selection import train_test_split
 
@@ -115,8 +115,8 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, random
 # train the model
 classifier = Perceptron(learning_rate=0.01)
 classifier.fit(x_train, y_train)
-print("accuracy %f" % accuracy_score(classifier.predict(x_test), y_test))
 print(classifier.misclassified_samples)
+print("accuracy %f" % accuracy_score(classifier.predict(x_test), y_test))
 
 # plot the number of errors during each iteration
 plt.plot(range(1, len(classifier.misclassified_samples) + 1), classifier.misclassified_samples, marker='o')

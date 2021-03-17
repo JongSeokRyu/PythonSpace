@@ -1,6 +1,6 @@
 # ID: 2021220942
 # NAME: 류종석
-# File name: template_read_iris_v2.py
+# File name: hw02-3.py
 # Platform: Python 3.9.0 on Window 10 (PyCharm)
 # Required Package(s): numpy, pandas, matplotlib, sklearn
 

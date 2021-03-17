@@ -1,6 +1,6 @@
 # ID: 2021220942
 # NAME: 류종석
-# File name: template_read_iris_v2.py
+# File name: hw02-5.py
 # Platform: Python 3.9.0 on Window 10 (PyCharm)
 # Required Package(s): numpy, pandas, matplotlib, sklearn
 
@@ -94,18 +94,16 @@ x = df.iloc[:, 1:].values
 
 
 # 클래스 1, 2 데이터만 가져와서 배열 재조합
-x1 = np.array(x[0:59])      # class 1 데이터
+x1 = np.array(x[59:130])    # class 2 데이터
 x2 = np.array(x[130:])      # class 3 데이터
 x = np.concatenate((x1,x2))
 x = np.float64(x)
 
 #클래스 1, 2 데이터만 가져와서 배열 재조합
-y1 = np.array(y[0:59])      # class 1 데이터
+y1 = np.array(y[59:130])    # class 2
 y2 = np.array(y[130:])      # class 3 데이터
 y = np.concatenate((y1,y2))
-print(y)
-y = np.where(y == '1', 1, -1)
-print(y)
+y = np.where(y == '2', 1, -1)
 y = np.float64(y)
 
 from sklearn.model_selection import train_test_split
