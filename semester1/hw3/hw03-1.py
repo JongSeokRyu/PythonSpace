@@ -2,7 +2,7 @@
 # NAME: 류종석
 # File name: hw03-1.py
 # Platform: Python 3.9.0 on Window 10 (PyCharm)
-# Required Package(s): numpy, matplotlib, sklearn
+# Required Package(s): warnings, pandas, matplotlib, sklearn(ver 0.24.1)
 
 #!/usr/bin/env python
 # coding: utf-8
@@ -39,17 +39,25 @@ print(__doc__)
 
 # Load data from https://www.openml.org/d/554
 X, y = fetch_openml('Fashion-MNIST', version=1, return_X_y=True)
+# 정규화
 X = X / 255.
 
 
-# rescale the data, use the traditional train/test split 6만대는 트레이닝 6만개부터는 테스트데이터로 나눔
+# rescale the data, use the traditional train/test split
+# 총 7만개 샘플에서 6만개 train data, 1만개 test data 
 X_train, X_test = X[:60000], X[60000:]
 y_train, y_test = y[:60000], y[60000:]
 
-# 여기가중요
-#activation=relu -> 디폴트값
-mlp = MLPClassifier(hidden_layer_sizes=(85,), max_iter=10, alpha=1e-4,
-                    solver='sgd', verbose=10, random_state=1,
+# hidden_layer_sizes : 은닉층 크기 (몇개의 퍼셉트론)
+# activation : 활성화 함수 (디폴트값 ReLU)
+# solver : 가중치 최적화를 위해 사용하는 함수 (디폴트값 sgd)
+# alpha : 신경망 내의 정규화 파라미터 (디폴트값 0.0001)
+# max_iter : 최대 반복 횟수
+# batch_size : 최적화를 시키기 위한 학습 최소 크기
+# learning_rate_init : 가중치를 업데이트 할 때 크기를 제어
+# learning_rate : 단계별로 움직이는 학습 속도
+mlp = MLPClassifier(hidden_layer_sizes=(108,), max_iter=10, alpha=1e-4,
+                    solver="sgd", verbose=10, random_state=1,
                     learning_rate_init=.1)
 
 # this example won't converge because of CI's time constraints, so we catch the
@@ -57,7 +65,8 @@ mlp = MLPClassifier(hidden_layer_sizes=(85,), max_iter=10, alpha=1e-4,
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=ConvergenceWarning,
                             module="sklearn")
-    mlp.fit(X_train, y_train) #훈련
+# 학습
+    mlp.fit(X_train, y_train)
 
 print("Training set score: %f" % mlp.score(X_train, y_train))
 print("Test set score: %f" % mlp.score(X_test, y_test))
@@ -66,16 +75,10 @@ fig, axes = plt.subplots(4, 4)
 # use global min / max to ensure all weights are shown on the same scale
 vmin, vmax = mlp.coefs_[0].min(), mlp.coefs_[0].max()
 for coef, ax in zip(mlp.coefs_[0].T, axes.ravel()):
+    #28x28 사이즈
     ax.matshow(coef.reshape(28, 28), cmap=plt.cm.gray, vmin=.5 * vmin,
                vmax=.5 * vmax)
     ax.set_xticks(())
     ax.set_yticks(())
 
 plt.show()
-
-#3-1
-# 데이터셋 다운로드받고 패션데이터로 변형하여 테스트, 성능좋게
-
-#3-1
-# 데이터셋 다운로드받고 패션데이터로 변형하여 테스트, 성능좋게
-#클래스별로따로테스트
