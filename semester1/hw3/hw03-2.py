@@ -2,7 +2,7 @@
 # NAME: 류종석
 # File name: hw03-2.py
 # Platform: Python 3.9.0 on Window 10 (PyCharm)
-# Required Package(s): warnings, pandas, matplotlib, sklearn(ver 0.24.1)
+# Required Package(s): warnings, matplotlib, sklearn(ver 0.24.1)
 
 #!/usr/bin/env python
 # coding: utf-8
@@ -30,19 +30,20 @@
 
 import warnings
 import matplotlib.pyplot as plt
-import sklearn
 
-from sklearn.datasets import fetch_openml
+from sklearn.datasets import load_digits
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.neural_network import MLPClassifier
 
 print(__doc__)
-print(sklearn.__version__)
+
 # Load data
-X, y = sklearn.datasets.load_digits(n_class=10, return_X_y=True, as_frame=False)
+digits = load_digits();
+X = digits.data;
+y = digits.target;
+
 # 정규화
 X = X / 255.
-#print(X)
 
 # rescale the data, use the traditional
 # 총 1797개 샘플에서 80% train data, 20% test data 설정
@@ -57,7 +58,7 @@ y_train, y_test = y[:1437], y[1437:]
 # batch_size : 최적화를 시키기 위한 학습 최소 크기
 # learning_rate_init : 가중치를 업데이트 할 때 크기를 제어
 # learning_rate : 단계별로 움직이는 학습 속도
-mlp = MLPClassifier(hidden_layer_sizes=(432,), max_iter=300, alpha=1e-4,
+mlp = MLPClassifier(hidden_layer_sizes=(184,), max_iter=300, alpha=1e-4,
                     solver='sgd', verbose=10, random_state=1,
                     learning_rate_init=.1)
 

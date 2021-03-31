@@ -2,7 +2,7 @@
 # NAME: 류종석
 # File name: hw03-1.py
 # Platform: Python 3.9.0 on Window 10 (PyCharm)
-# Required Package(s): warnings, pandas, matplotlib, sklearn(ver 0.24.1)
+# Required Package(s): warnings, matplotlib, sklearn(ver 0.24.1)
 
 #!/usr/bin/env python
 # coding: utf-8
@@ -56,12 +56,12 @@ y_train, y_test = y[:60000], y[60000:]
 # batch_size : 최적화를 시키기 위한 학습 최소 크기
 # learning_rate_init : 가중치를 업데이트 할 때 크기를 제어
 # learning_rate : 단계별로 움직이는 학습 속도
-mlp = MLPClassifier(hidden_layer_sizes=(108,), max_iter=10, alpha=1e-4,
+mlp = MLPClassifier(hidden_layer_sizes=(65,), max_iter=10, alpha=1e-4,
                     solver="sgd", verbose=10, random_state=1,
                     learning_rate_init=.1)
 
 # this example won't converge because of CI's time constraints, so we catch the
-# warning and are ignore it here
+# warning and are ignore it here`
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=ConvergenceWarning,
                             module="sklearn")
