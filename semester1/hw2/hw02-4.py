@@ -103,9 +103,7 @@ x = np.float64(x)
 y1 = np.array(y[0:59])      # class 1 데이터
 y2 = np.array(y[130:])      # class 3 데이터
 y = np.concatenate((y1,y2))
-print(y)
 y = np.where(y == '1', 1, -1)
-print(y)
 y = np.float64(y)
 
 from sklearn.model_selection import train_test_split
